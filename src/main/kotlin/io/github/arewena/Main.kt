@@ -13,7 +13,8 @@ class Main : JavaPlugin(), Listener {
 
     @EventHandler
     fun onChat(event: PlayerChatEvent) {
-        logger.info(event.player.toString())
+        logger.info(event.player.name)
+        logger.info(event.message)
 
     }
 }
