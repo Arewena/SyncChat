@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 class Main : JavaPlugin(), Listener {
     override fun onEnable() {
-        val builder = JDABuilder.createDefault("OTE1MTQyNzEyNDAyMDAxOTIw.G69HFV.XIZDePovPF5EbNXh16CaVAAZ68aCp4oMkfO-s8").build()
+        val builder = JDABuilder.createDefault("token").build()
         builder.presence.setStatus(OnlineStatus.ONLINE)
         logger.info("Plugin Enabled")
         this.server.pluginManager.registerEvents(this, this)
