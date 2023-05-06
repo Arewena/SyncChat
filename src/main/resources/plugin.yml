@@ -1,4 +1,4 @@
-main: io.github.arewena.Main
+main: io.github.arewena.MinecraftEvent
 name: SyncChatPlugin
 version: 1.19
 libraries:
