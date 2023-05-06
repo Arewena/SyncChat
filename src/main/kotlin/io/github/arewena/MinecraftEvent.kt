@@ -13,7 +13,7 @@ class MinecraftEvent : JavaPlugin(), Listener {
 
 
     override fun onEnable() {
-        val jda = JDABuilder.createDefault("OTE1MTQyNzEyNDAyMDAxOTIw.GHkucr.do5Nmyak2CFL2tBvtVrFaUB0D_XdloklkB3E7Y").build()
+        val jda = JDABuilder.createDefault("token").build()
         jda.presence.setStatus(OnlineStatus.ONLINE)
         logger.info("Plugin Enabled")
         this.server.pluginManager.registerEvents(this, this)
