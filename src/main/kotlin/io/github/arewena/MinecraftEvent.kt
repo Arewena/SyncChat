@@ -11,7 +11,7 @@ class MinecraftEvent : JavaPlugin(), Listener {
 
 
     override fun onEnable() {
-        val start = BotEvent().set("OTE1MTQyNzEyNDAyMDAxOTIw.G9f1fq.DstiC27ixDgGSedah-SzfD0up_z2y6cTkdIbSU")
+        val start = BotEvent().set("")
         logger.info("Plugin Enabled")
         this.server.pluginManager.registerEvents(this, this)
     }
