@@ -1,8 +1,6 @@
 package io.github.arewena
 
 
-import net.dv8tion.jda.api.JDABuilder
-import net.dv8tion.jda.api.OnlineStatus
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -13,8 +11,7 @@ class MinecraftEvent : JavaPlugin(), Listener {
 
 
     override fun onEnable() {
-        val jda = JDABuilder.createDefault("token").build()
-        jda.presence.setStatus(OnlineStatus.ONLINE)
+        val start = BotEvent().set("OTE1MTQyNzEyNDAyMDAxOTIw.G9f1fq.DstiC27ixDgGSedah-SzfD0up_z2y6cTkdIbSU")
         logger.info("Plugin Enabled")
         this.server.pluginManager.registerEvents(this, this)
     }
