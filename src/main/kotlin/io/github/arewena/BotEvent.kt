@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEve
 import net.dv8tion.jda.api.hooks.EventListener
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.interactions.commands.build.Commands
+import java.awt.Color
 
 
 val jda = JDABuilder.createLight("token")
@@ -35,15 +36,19 @@ class BotEvent : EventListener, ListenerAdapter() {
                 1 -> jda.getTextChannelById(selectedChannel!!)?.sendMessage("<$user> $message")?.queue()
                 2 -> jda.getTextChannelById(selectedChannel!!)?.sendMessageEmbeds(EmbedBuilder().apply {
                     author("$user (이)가 서버에 입장하셨습니다.", null, null)
+                    color = Color.GREEN.rgb
                 }.build())?.queue()
                 3 -> jda.getTextChannelById(selectedChannel!!)?.sendMessageEmbeds(EmbedBuilder().apply {
                     author("$user (이)가 서버에서 퇴장하셨습니다.", null, null)
+                    color = Color.RED.rgb
                 }.build())?.queue()
                 4 -> jda.getTextChannelById(selectedChannel!!)?.sendMessageEmbeds(EmbedBuilder().apply {
                     author("$user (이)가 사망하셨습니다!", null, null)
+                    color = Color.GRAY.rgb
                 }.build())?.queue()
                 5 -> jda.getTextChannelById(selectedChannel!!)?.sendMessageEmbeds(EmbedBuilder().apply {
                     author("$user (이)가 $message 발전과제를 달성하셨습니다!", null, null)
+                    color = Color.YELLOW.rgb
                 }.build())?.queue()
             }
         }
