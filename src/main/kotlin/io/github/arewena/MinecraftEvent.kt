@@ -4,7 +4,6 @@ package io.github.arewena
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
-import org.bukkit.event.player.PlayerAdvancementDoneEvent
 import org.bukkit.event.player.PlayerChatEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
@@ -13,7 +12,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 
 class MinecraftEvent : JavaPlugin(), Listener {
-    // TODO: 디스코드 -> 마인크래프트로 채팅 보내는 함수 만들기, shutdown 어떻게 할지 구상하기, 발전과제 메시지 수정
+    // TODO: 플레이어 머리 스킨 이미지 보낼 방법 찾기
     // 토큰 지우는거 잊어먹지 말기!!
 
 
@@ -23,6 +22,11 @@ class MinecraftEvent : JavaPlugin(), Listener {
         BotEvent().set()
         this.server.pluginManager.registerEvents(this, this)
 
+    }
+
+    override fun onDisable() {
+        logger.info("Plugin Disabled")
+        jda.shutdown()
     }
 
     @EventHandler
@@ -40,8 +44,6 @@ class MinecraftEvent : JavaPlugin(), Listener {
     @EventHandler
     fun onDeath(event: PlayerDeathEvent) {BotEvent().message(event.player.name, "", 4)}
 
-    @EventHandler
-    fun onDone(event: PlayerAdvancementDoneEvent) {BotEvent().message(event.player.name, event.advancement.toString(), 5)}
 
 
 }

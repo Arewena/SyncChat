@@ -4,13 +4,17 @@ import dev.minn.jda.ktx.EmbedBuilder
 import net.dv8tion.jda.api.JDABuilder
 import net.dv8tion.jda.api.OnlineStatus
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent
+import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.EventListener
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.interactions.commands.build.Commands
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
+import org.bukkit.Bukkit
 import java.awt.Color
 
 
-val jda = JDABuilder.createLight("token")
+val jda = JDABuilder.createLight("")
     .addEventListeners(BotEvent())
     .setStatus(OnlineStatus.ONLINE)
     .build()
@@ -20,7 +24,13 @@ var selectedChannel: Long? = null
 
 
 class BotEvent : EventListener, ListenerAdapter() {
-    // TODO: 디스코드 -> 마인크래프트로 채팅을 보낼 방법 구상하기, 임베드 수정
+    override fun onMessageReceived(event: MessageReceivedEvent) {
+        for (player in Bukkit.getOnlinePlayers()) {
+            player.sendMessage(
+                Component.text("[DISCORD]").color(NamedTextColor.BLUE).append(Component.text("<${event.author.toString()}> ${event.message}")))
+        }
+    }
+
 
     fun set() {
         jda.updateCommands().addCommands(
@@ -46,10 +56,7 @@ class BotEvent : EventListener, ListenerAdapter() {
                     author("$user (이)가 사망하셨습니다!", null, null)
                     color = Color.GRAY.rgb
                 }.build())?.queue()
-                5 -> jda.getTextChannelById(selectedChannel!!)?.sendMessageEmbeds(EmbedBuilder().apply {
-                    author("$user (이)가 $message 발전과제를 달성하셨습니다!", null, null)
-                    color = Color.YELLOW.rgb
-                }.build())?.queue()
+
             }
         }
     }
