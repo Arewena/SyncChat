@@ -8,6 +8,7 @@ import net.dv8tion.jda.api.events.message.MessageReceivedEvent
 import net.dv8tion.jda.api.hooks.EventListener
 import net.dv8tion.jda.api.hooks.ListenerAdapter
 import net.dv8tion.jda.api.interactions.commands.build.Commands
+import net.dv8tion.jda.api.requests.GatewayIntent
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.Bukkit
@@ -16,6 +17,7 @@ import java.awt.Color
 
 val jda = JDABuilder.createLight("")
     .addEventListeners(BotEvent())
+    .enableIntents(GatewayIntent.MESSAGE_CONTENT)
     .setStatus(OnlineStatus.ONLINE)
     .build()
 
@@ -25,9 +27,11 @@ var selectedChannel: Long? = null
 
 class BotEvent : EventListener, ListenerAdapter() {
     override fun onMessageReceived(event: MessageReceivedEvent) {
-        for (player in Bukkit.getOnlinePlayers()) {
-            player.sendMessage(
-                Component.text("[DISCORD]").color(NamedTextColor.BLUE).append(Component.text("<${event.author.toString()}> ${event.message}")))
+        if (!event.author.isBot) {
+            for (player in Bukkit.getOnlinePlayers()) {
+                player.sendMessage(
+                    Component.text("[DISCORD]").color(NamedTextColor.BLUE).append(Component.text("<${event.author.name}> ${event.message.contentRaw}").color(NamedTextColor.WHITE)))
+            }
         }
     }
 
