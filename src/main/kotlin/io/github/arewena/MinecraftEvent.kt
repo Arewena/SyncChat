@@ -36,13 +36,13 @@ class MinecraftEvent : JavaPlugin(), Listener {
     }
 
     @EventHandler
-    fun onJoin(event: PlayerJoinEvent) { BotEvent().message(event.player.name, "", 2) }
+    fun onJoin(event: PlayerJoinEvent) { BotEvent().message(event.player.name, "https://mc-heads.net/avatar/${event.player.name}", 2) }
 
     @EventHandler
-    fun onLeft(event: PlayerQuitEvent) { BotEvent().message(event.player.name, "", 3) }
+    fun onLeft(event: PlayerQuitEvent) { BotEvent().message(event.player.name, "https://mc-heads.net/avatar/${event.player.name}", 3) }
 
     @EventHandler
-    fun onDeath(event: PlayerDeathEvent) {BotEvent().message(event.player.name, "", 4)}
+    fun onDeath(event: PlayerDeathEvent) {BotEvent().message(event.player.name, "https://mc-heads.net/avatar/${event.player.name}", 4)}
 
 
 

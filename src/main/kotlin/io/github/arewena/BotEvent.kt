@@ -15,7 +15,7 @@ import org.bukkit.Bukkit
 import java.awt.Color
 
 
-val jda = JDABuilder.createLight("")
+val jda = JDABuilder.createLight("token")
     .addEventListeners(BotEvent())
     .enableIntents(GatewayIntent.MESSAGE_CONTENT)
     .setStatus(OnlineStatus.ONLINE)
@@ -49,15 +49,15 @@ class BotEvent : EventListener, ListenerAdapter() {
             when (type) {
                 1 -> jda.getTextChannelById(selectedChannel!!)?.sendMessage("<$user> $message")?.queue()
                 2 -> jda.getTextChannelById(selectedChannel!!)?.sendMessageEmbeds(EmbedBuilder().apply {
-                    author("$user (이)가 서버에 입장하셨습니다.", null, null)
+                    author("$user (이)가 서버에 입장하셨습니다.", null, message)
                     color = Color.GREEN.rgb
                 }.build())?.queue()
                 3 -> jda.getTextChannelById(selectedChannel!!)?.sendMessageEmbeds(EmbedBuilder().apply {
-                    author("$user (이)가 서버에서 퇴장하셨습니다.", null, null)
+                    author("$user (이)가 서버에서 퇴장하셨습니다.", null, message)
                     color = Color.RED.rgb
                 }.build())?.queue()
                 4 -> jda.getTextChannelById(selectedChannel!!)?.sendMessageEmbeds(EmbedBuilder().apply {
-                    author("$user (이)가 사망하셨습니다!", null, null)
+                    author("$user (이)가 사망하셨습니다!", null, message)
                     color = Color.GRAY.rgb
                 }.build())?.queue()
 
